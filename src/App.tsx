@@ -3,6 +3,7 @@ import Map from "ol/Map";
 import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import HeatMapLayer from "ol/layer/Heatmap";
+import VectorLayer from "ol/layer/Vector";
 import OSM from "ol/source/OSM";
 import VectorSource from "ol/source/Vector";
 import { fromLonLat } from "ol/proj";
@@ -11,6 +12,10 @@ import GeoJSON from "ol/format/GeoJSON";
 import "./App.css";
 import Point from "ol/geom/Point";
 import { Feature } from "ol";
+import Style from "ol/style/Style";
+import Text from "ol/style/Text";
+import Fill from "ol/style/Fill";
+import Stroke from "ol/style/Stroke";
 
 // TODO: Fetch data from API
 const data: { coordinates: number[]; value: number }[] = [
@@ -24,13 +29,38 @@ const data: { coordinates: number[]; value: number }[] = [
   },
 ];
 
-const vectorSource = new VectorSource({
+const heatmapSource = new VectorSource({
   format: new GeoJSON(),
   loader: () => {
-    vectorSource.addFeatures(
+    heatmapSource.addFeatures(
       data.map((station) => {
         const feature = new Feature(new Point(fromLonLat(station.coordinates)));
         feature.setProperties({ value: station.value });
+        return feature;
+      })
+    );
+  },
+});
+
+const textSource = new VectorSource({
+  format: new GeoJSON(),
+  loader: () => {
+    textSource.addFeatures(
+      data.map((station) => {
+        const feature = new Feature(new Point(fromLonLat(station.coordinates)));
+        feature.setProperties({ value: station.value });
+
+        feature.setStyle(
+          new Style({
+            text: new Text({
+              font: "20px Helvetica",
+              fill: new Fill({ color: "#fff" }),
+              stroke: new Stroke({ color: "#000" }),
+              text: station.value.toString(),
+              overflow: true,
+            }),
+          })
+        );
         return feature;
       })
     );
@@ -49,12 +79,15 @@ setTimeout(() => {
         source: new OSM(),
       }),
       new HeatMapLayer({
-        source: vectorSource,
+        source: heatmapSource,
         weight: (feature) => {
           return (feature.get("value") - 1) * 2; // TODO: Create proper scaling function
         },
         blur: 25,
         radius: 50,
+      }),
+      new VectorLayer({
+        source: textSource,
       }),
     ],
   });
