@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Map from "ol/Map";
+import View from "ol/View";
+import TileLayer from "ol/layer/Tile";
+import OSM from "ol/source/OSM";
+import { fromLonLat } from "ol/proj";
 
-function App() {
+import "./App.css";
+
+setTimeout(() => {
+  new Map({
+    target: "map",
+    view: new View({
+      center: fromLonLat([24.65, 60.2]),
+      zoom: 12.5,
+    }),
+    layers: [
+      new TileLayer({
+        source: new OSM(),
+      }),
+    ],
+  });
+}, 1000);
+
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div id="map" className="map" />
     </div>
   );
-}
+};
 
 export default App;
