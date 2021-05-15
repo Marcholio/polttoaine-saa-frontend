@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/polttoaine-saa-frontend/static/css/main.1bb189e3.chunk.css",
-    "main.js": "/polttoaine-saa-frontend/static/js/main.190379ce.chunk.js",
-    "main.js.map": "/polttoaine-saa-frontend/static/js/main.190379ce.chunk.js.map",
-    "runtime-main.js": "/polttoaine-saa-frontend/static/js/runtime-main.7a54836f.js",
-    "runtime-main.js.map": "/polttoaine-saa-frontend/static/js/runtime-main.7a54836f.js.map",
-    "static/js/2.737ceb7a.chunk.js": "/polttoaine-saa-frontend/static/js/2.737ceb7a.chunk.js",
-    "static/js/2.737ceb7a.chunk.js.map": "/polttoaine-saa-frontend/static/js/2.737ceb7a.chunk.js.map",
-    "static/js/3.a30a1996.chunk.js": "/polttoaine-saa-frontend/static/js/3.a30a1996.chunk.js",
-    "static/js/3.a30a1996.chunk.js.map": "/polttoaine-saa-frontend/static/js/3.a30a1996.chunk.js.map",
+    "main.js": "/polttoaine-saa-frontend/static/js/main.d362c17a.chunk.js",
+    "main.js.map": "/polttoaine-saa-frontend/static/js/main.d362c17a.chunk.js.map",
+    "runtime-main.js": "/polttoaine-saa-frontend/static/js/runtime-main.a2fbfeea.js",
+    "runtime-main.js.map": "/polttoaine-saa-frontend/static/js/runtime-main.a2fbfeea.js.map",
+    "static/js/2.d9a361b4.chunk.js": "/polttoaine-saa-frontend/static/js/2.d9a361b4.chunk.js",
+    "static/js/2.d9a361b4.chunk.js.map": "/polttoaine-saa-frontend/static/js/2.d9a361b4.chunk.js.map",
+    "static/js/3.1501db53.chunk.js": "/polttoaine-saa-frontend/static/js/3.1501db53.chunk.js",
+    "static/js/3.1501db53.chunk.js.map": "/polttoaine-saa-frontend/static/js/3.1501db53.chunk.js.map",
     "index.html": "/polttoaine-saa-frontend/index.html",
     "static/css/main.1bb189e3.chunk.css.map": "/polttoaine-saa-frontend/static/css/main.1bb189e3.chunk.css.map",
-    "static/js/2.737ceb7a.chunk.js.LICENSE.txt": "/polttoaine-saa-frontend/static/js/2.737ceb7a.chunk.js.LICENSE.txt"
+    "static/js/2.d9a361b4.chunk.js.LICENSE.txt": "/polttoaine-saa-frontend/static/js/2.d9a361b4.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.7a54836f.js",
-    "static/js/2.737ceb7a.chunk.js",
+    "static/js/runtime-main.a2fbfeea.js",
+    "static/js/2.d9a361b4.chunk.js",
     "static/css/main.1bb189e3.chunk.css",
-    "static/js/main.190379ce.chunk.js"
+    "static/js/main.d362c17a.chunk.js"
   ]
 }
