@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/polttoaine-saa-frontend/static/css/main.1bb189e3.chunk.css",
-    "main.js": "/polttoaine-saa-frontend/static/js/main.d362c17a.chunk.js",
-    "main.js.map": "/polttoaine-saa-frontend/static/js/main.d362c17a.chunk.js.map",
-    "runtime-main.js": "/polttoaine-saa-frontend/static/js/runtime-main.a2fbfeea.js",
-    "runtime-main.js.map": "/polttoaine-saa-frontend/static/js/runtime-main.a2fbfeea.js.map",
-    "static/js/2.d9a361b4.chunk.js": "/polttoaine-saa-frontend/static/js/2.d9a361b4.chunk.js",
-    "static/js/2.d9a361b4.chunk.js.map": "/polttoaine-saa-frontend/static/js/2.d9a361b4.chunk.js.map",
-    "static/js/3.1501db53.chunk.js": "/polttoaine-saa-frontend/static/js/3.1501db53.chunk.js",
-    "static/js/3.1501db53.chunk.js.map": "/polttoaine-saa-frontend/static/js/3.1501db53.chunk.js.map",
+    "main.css": "/polttoaine-saa-frontend/static/css/main.e07f3bc8.chunk.css",
+    "main.js": "/polttoaine-saa-frontend/static/js/main.f8ae5dc0.chunk.js",
+    "main.js.map": "/polttoaine-saa-frontend/static/js/main.f8ae5dc0.chunk.js.map",
+    "runtime-main.js": "/polttoaine-saa-frontend/static/js/runtime-main.ded3b9e3.js",
+    "runtime-main.js.map": "/polttoaine-saa-frontend/static/js/runtime-main.ded3b9e3.js.map",
+    "static/js/2.376284fd.chunk.js": "/polttoaine-saa-frontend/static/js/2.376284fd.chunk.js",
+    "static/js/2.376284fd.chunk.js.map": "/polttoaine-saa-frontend/static/js/2.376284fd.chunk.js.map",
+    "static/js/3.ca071a82.chunk.js": "/polttoaine-saa-frontend/static/js/3.ca071a82.chunk.js",
+    "static/js/3.ca071a82.chunk.js.map": "/polttoaine-saa-frontend/static/js/3.ca071a82.chunk.js.map",
     "index.html": "/polttoaine-saa-frontend/index.html",
-    "static/css/main.1bb189e3.chunk.css.map": "/polttoaine-saa-frontend/static/css/main.1bb189e3.chunk.css.map",
-    "static/js/2.d9a361b4.chunk.js.LICENSE.txt": "/polttoaine-saa-frontend/static/js/2.d9a361b4.chunk.js.LICENSE.txt"
+    "static/css/main.e07f3bc8.chunk.css.map": "/polttoaine-saa-frontend/static/css/main.e07f3bc8.chunk.css.map",
+    "static/js/2.376284fd.chunk.js.LICENSE.txt": "/polttoaine-saa-frontend/static/js/2.376284fd.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.a2fbfeea.js",
-    "static/js/2.d9a361b4.chunk.js",
-    "static/css/main.1bb189e3.chunk.css",
-    "static/js/main.d362c17a.chunk.js"
+    "static/js/runtime-main.ded3b9e3.js",
+    "static/js/2.376284fd.chunk.js",
+    "static/css/main.e07f3bc8.chunk.css",
+    "static/js/main.f8ae5dc0.chunk.js"
   ]
 }
