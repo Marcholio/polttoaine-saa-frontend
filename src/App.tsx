@@ -16,16 +16,14 @@ import Text from "ol/style/Text";
 import Fill from "ol/style/Fill";
 import Stroke from "ol/style/Stroke";
 
+import { Station } from "./types";
+
 import "./App.css";
 
 const App = () => {
   const [state, setState] = useState<{
     loading: Boolean;
-    stations: {
-      station: string;
-      coordinates: number[];
-      prices: { "98": number; "95": number; Diesel: number };
-    }[];
+    stations: Station[];
   }>({
     loading: true,
     stations: [],
@@ -34,15 +32,16 @@ const App = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: "https://xxxx.execute-api.eu-central-1.amazonaws.com/dev/stations",
+      url: `${process.env.REACT_APP_API_URL}/stations`,
       headers: {
-        "x-api-key": "xxxx",
+        "x-api-key": process.env.REACT_APP_API_KEY,
       },
     }).then((res: any) => setState({ stations: res.data, loading: false }));
   }, []);
 
   useEffect(() => {
     if (!state.loading) {
+      console.log(state.stations);
       const heatmapSource = new VectorSource({
         format: new GeoJSON(),
         loader: () => {
@@ -51,7 +50,7 @@ const App = () => {
               const feature = new Feature(
                 new Point(fromLonLat(station.coordinates))
               );
-              feature.setProperties({ value: station.prices["95"] });
+              feature.setProperties({ value: station.prices.Ysi5 });
               return feature;
             })
           );
@@ -66,7 +65,7 @@ const App = () => {
               const feature = new Feature(
                 new Point(fromLonLat(station.coordinates))
               );
-              feature.setProperties({ value: station.prices["95"] });
+              feature.setProperties({ value: station.prices.Ysi5 });
 
               feature.setStyle(
                 new Style({
@@ -74,7 +73,7 @@ const App = () => {
                     font: "20px Helvetica",
                     fill: new Fill({ color: "#fff" }),
                     stroke: new Stroke({ color: "#000" }),
-                    text: station.prices["95"].toString(),
+                    text: station.prices.Ysi5.toString(),
                     overflow: true,
                   }),
                 })
@@ -98,10 +97,10 @@ const App = () => {
           new HeatMapLayer({
             source: heatmapSource,
             weight: (feature) => {
-              return (feature.get("value") - 1) * 2; // TODO: Create proper scaling function
+              return (feature.get("value") - 1.4) * 3;
             },
-            blur: 25,
-            radius: 50,
+            blur: 250,
+            radius: 125,
           }),
           new VectorLayer({
             source: textSource,
