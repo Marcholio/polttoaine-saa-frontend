@@ -8,3 +8,5 @@ export type Station = {
     Diesel: number;
   };
 };
+
+export type Fuel = "Ysi5" | "Ysi8" | "Diesel";
