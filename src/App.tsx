@@ -168,6 +168,17 @@ const App = () => {
         updateSelectedFuel={updateSelectedFuel}
         selectedFuel={state.selectedFuel}
       />
+      <div id="createdby">
+        <span>Created by Markus Tyrkkö - </span>
+        <a
+          id="sourcecode"
+          href="https://github.com/Marcholio/polttoaine-saa-frontend"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Source code
+        </a>
+      </div>
     </div>
   );
 };
