@@ -45,4 +45,4 @@ Licensed under MIT license. See LICENSE for further information.
 
 ## Known limitations
 
-- Heatmap is not an ideal visualisation for prefering lower prices.
+- Heatmap is not an ideal visualisation for preferring lower prices.
