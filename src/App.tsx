@@ -1,30 +1,73 @@
 import React, { useEffect, useState, useRef } from "react";
+
 import Map from "ol/Map";
 import View from "ol/View";
+
 import TileLayer from "ol/layer/Tile";
 import HeatMapLayer from "ol/layer/Heatmap";
 import VectorLayer from "ol/layer/Vector";
+
 import OSM from "ol/source/OSM";
 import VectorSource from "ol/source/Vector";
+
 import { fromLonLat } from "ol/proj";
 import GeoJSON from "ol/format/GeoJSON";
-import axios from "axios";
+
+import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
-import { Feature } from "ol";
+import Geometry from "ol/geom/Geometry";
+
 import Style from "ol/style/Style";
 import Text from "ol/style/Text";
 import Fill from "ol/style/Fill";
 import Stroke from "ol/style/Stroke";
 
+import axios from "axios";
 import { Button } from "@material-ui/core";
 
 import { Fuel, Station } from "./types";
 
 import "./App.css";
 
+const createPointFeatures = (
+  stations: Station[],
+  selectedFuel: Fuel
+): Feature<Point>[] =>
+  stations.map((station) => {
+    const feature = new Feature(new Point(fromLonLat(station.coordinates)));
+    feature.setProperties({
+      value: station.prices[selectedFuel],
+    });
+    return feature;
+  });
+
+const createTextFeatures = (stations: Station[], selectedFuel: Fuel) => {
+  const features = createPointFeatures(stations, selectedFuel);
+
+  features.forEach((feat) =>
+    feat.setStyle(
+      new Style({
+        text: new Text({
+          font: "20px Helvetica",
+          fill: new Fill({ color: "#fff" }),
+          stroke: new Stroke({ color: "#000" }),
+          text: feat.get("value").toString(),
+          overflow: true,
+        }),
+      })
+    )
+  );
+
+  return features;
+};
+
+const scaleValue = (feature: Feature<Geometry>, selectedFuel: Fuel): number =>
+  (feature.get("value") - (selectedFuel === "Diesel" ? 1.4 : 1.5)) * 10;
+
 const App = () => {
   const map = useRef({} as Map);
 
+  // Initialize map with base layer
   useEffect(() => {
     map.current = new Map({
       target: "map",
@@ -63,8 +106,10 @@ const App = () => {
     );
   }, []);
 
+  // Update map layers
   useEffect(() => {
     if (!state.loading) {
+      // Clear layers
       map.current.getLayers().forEach((layer, i) => {
         // Do not remove base map layer
         if (i !== 0) {
@@ -72,48 +117,12 @@ const App = () => {
         }
       });
 
+      // HEATMAP LAYER
       const heatmapSource = new VectorSource({
         format: new GeoJSON(),
         loader: () => {
           heatmapSource.addFeatures(
-            state.stations.map((station) => {
-              const feature = new Feature(
-                new Point(fromLonLat(station.coordinates))
-              );
-              feature.setProperties({
-                value: station.prices[state.selectedFuel],
-              });
-              return feature;
-            })
-          );
-        },
-      });
-
-      const textSource = new VectorSource({
-        format: new GeoJSON(),
-        loader: () => {
-          textSource.addFeatures(
-            state.stations.map((station) => {
-              const feature = new Feature(
-                new Point(fromLonLat(station.coordinates))
-              );
-              feature.setProperties({
-                value: station.prices[state.selectedFuel],
-              });
-
-              feature.setStyle(
-                new Style({
-                  text: new Text({
-                    font: "20px Helvetica",
-                    fill: new Fill({ color: "#fff" }),
-                    stroke: new Stroke({ color: "#000" }),
-                    text: station.prices[state.selectedFuel].toString(),
-                    overflow: true,
-                  }),
-                })
-              );
-              return feature;
-            })
+            createPointFeatures(state.stations, state.selectedFuel)
           );
         },
       });
@@ -121,13 +130,21 @@ const App = () => {
       map.current.addLayer(
         new HeatMapLayer({
           source: heatmapSource,
-          weight: (feature) => {
-            return (feature.get("value") - 1.4) * 3;
-          },
+          weight: (feature) => scaleValue(feature, state.selectedFuel),
           blur: 250,
           radius: 125,
         })
       );
+
+      // TEXT LAYER
+      const textSource = new VectorSource({
+        format: new GeoJSON(),
+        loader: () => {
+          textSource.addFeatures(
+            createTextFeatures(state.stations, state.selectedFuel)
+          );
+        },
+      });
 
       map.current.addLayer(
         new VectorLayer({
