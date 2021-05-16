@@ -23,7 +23,8 @@ import Fill from "ol/style/Fill";
 import Stroke from "ol/style/Stroke";
 
 import axios from "axios";
-import { Button } from "@material-ui/core";
+
+import FuelSelector from "./components/FuelSelector";
 
 import { Fuel, Station } from "./types";
 
@@ -163,29 +164,10 @@ const App = () => {
   return (
     <div className="App">
       <div id="map" className="map" />
-      <div id="fuelSelector">
-        <Button
-          color={state.selectedFuel === "Ysi5" ? "primary" : "default"}
-          variant="contained"
-          onClick={() => updateSelectedFuel("Ysi5")}
-        >
-          95
-        </Button>
-        <Button
-          color={state.selectedFuel === "Ysi8" ? "primary" : "default"}
-          variant="contained"
-          onClick={() => updateSelectedFuel("Ysi8")}
-        >
-          98
-        </Button>
-        <Button
-          color={state.selectedFuel === "Diesel" ? "primary" : "default"}
-          variant="contained"
-          onClick={() => updateSelectedFuel("Diesel")}
-        >
-          Diesel
-        </Button>
-      </div>
+      <FuelSelector
+        updateSelectedFuel={updateSelectedFuel}
+        selectedFuel={state.selectedFuel}
+      />
     </div>
   );
 };
